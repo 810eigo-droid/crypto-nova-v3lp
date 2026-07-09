@@ -612,10 +612,18 @@ strong{ color:var(--blue-deep); font-weight:700; }
    =================================================== */
 .video-frame{
   position:relative; max-width:880px; margin:0 auto;
+  aspect-ratio:16/9;
   border-radius:20px; overflow:hidden;
   box-shadow:0 24px 60px -20px rgba(23,50,77,.35);
   border:6px solid var(--white);
   outline:1.5px solid var(--line);
+}
+/* 縦型（YouTube Shorts / スマホ動画）用 */
+.video-frame.vertical{
+  aspect-ratio:9/16;
+  max-width:340px;
+  border-width:8px;
+  border-radius:32px;
 }
 .video-frame iframe, .video-frame video{
   position:absolute; inset:0; width:100%; height:100%; border:0;
