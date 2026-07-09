@@ -41,12 +41,6 @@
   <div class="fv-orb orb-1" aria-hidden="true"></div>
   <div class="fv-orb orb-2" aria-hidden="true"></div>
 
-  <!-- 背景キャラクター（透過画像をimagesに入れると表示） -->
-  <div class="fv-characters" aria-hidden="true">
-    <figure class="ph fv-char char-l" data-src="char-left.webp" data-size="520×760・透過" style="aspect-ratio:52/76"></figure>
-    <figure class="ph fv-char char-r" data-src="char-right.webp" data-size="520×760・透過" style="aspect-ratio:52/76"></figure>
-  </div>
-
   <!-- 浮遊コイン（CSS描画・画像不要） -->
   <div class="fv-coins" aria-hidden="true">
     <span class="coin c1">₿</span>
@@ -77,11 +71,6 @@
         <li><i></i>類似率で<b>順位づけ</b></li>
         <li><i></i>注意銘柄に<b>警告マーク</b></li>
       </ul>
-
-      <div class="fv-disclaimer reveal d4">
-        <p>※本アプリは市場データの分析・情報提供を行うものであり、利益を保証するものではありません。</p>
-        <p>※暗号資産の取引には価格変動等のリスクがあります。</p>
-      </div>
     </div>
 
     <div class="fv-visual reveal d2">
@@ -104,8 +93,14 @@
     </div>
   </div>
 
-  <div class="fv-scrollcue reveal d4" aria-hidden="true">
-    スクロールして詳しく<span class="cue-arrow">↓</span>
+  <!-- キャラクター＋注意書きの地面ゾーン -->
+  <div class="container fv-foot reveal d4">
+    <figure class="ph fv-char char-l" data-src="char-left.webp" data-size="520×760・透過" style="aspect-ratio:52/76"></figure>
+    <div class="fv-disclaimer">
+      <p>※本アプリは市場データの分析・情報提供を行うものであり、利益を保証するものではありません。</p>
+      <p>※暗号資産の取引には価格変動等のリスクがあります。</p>
+    </div>
+    <figure class="ph fv-char char-r" data-src="char-right.webp" data-size="520×760・透過" style="aspect-ratio:52/76"></figure>
   </div>
 
   <div class="fv-wave" aria-hidden="true">

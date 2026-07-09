@@ -224,13 +224,14 @@ strong{ color:var(--blue-deep); font-weight:700; }
    =================================================== */
 .fv{
   position:relative;
-  padding:140px 0 130px;
+  padding:128px 0 24px;
   background:
     radial-gradient(55% 45% at 82% 8%, rgba(255,243,214,.85), transparent 60%),
     radial-gradient(48% 40% at 8% 78%, rgba(200,228,250,.85), transparent 62%),
     linear-gradient(165deg, #F4FAFF 0%, var(--bg-blue) 55%, var(--bg-blue-2) 100%);
   overflow:hidden;
 }
+@media (max-width:760px){ .fv{ padding:74px 0 20px; } }
 .fv-orb{
   position:absolute; border-radius:50%; z-index:0; pointer-events:none;
   filter:blur(8px); opacity:.55;
@@ -247,20 +248,14 @@ strong{ color:var(--blue-deep); font-weight:700; }
 }
 @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-18px); } }
 
-/* 背景キャラクター */
-.fv-characters{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+/* フッターのキャラクター（透過画像をimagesに入れると表示） */
 .fv-char{
-  position:absolute; bottom:0;
-  width:clamp(150px, 17vw, 250px);
-  border-radius:0; background:none; border:0;
-  opacity:.96;
+  width:clamp(120px, 14vw, 200px);
+  align-self:flex-end;
+  border:0; background:none; border-radius:0;
 }
-.fv-char::before, .fv-char::after{ opacity:.5; } /* プレースホルダ表示を控えめに */
+.fv-char::before, .fv-char::after{ opacity:.5; }
 .fv-char.loaded img{ object-fit:contain; object-position:bottom; }
-.char-l{ left:0; }
-.char-r{ right:0; }
-@media (max-width:1100px){ .fv-char{ opacity:.5; width:clamp(110px, 20vw, 180px); } }
-@media (max-width:760px){ .fv-char{ opacity:.35; width:120px; bottom:-10px; } }
 
 /* 浮遊コイン（CSS） */
 .fv-coins{ position:absolute; inset:0; z-index:1; pointer-events:none; }
@@ -279,13 +274,19 @@ strong{ color:var(--blue-deep); font-weight:700; }
   content:""; position:absolute; inset:5px; border-radius:50%;
   border:1.5px dashed rgba(150,110,20,.3);
 }
-.coin.c1{ top:16%; left:12%; width:52px; height:52px; font-size:21px; animation-delay:-0.5s; }
-.coin.c2{ top:60%; left:6%; width:38px; height:38px; font-size:15px; animation-delay:-1.6s; }
-.coin.c3{ top:12%; right:16%; width:40px; height:40px; font-size:16px; animation-delay:-2.4s; }
-.coin.c4{ top:74%; right:10%; width:34px; height:34px; font-size:14px; animation-delay:-3.1s; }
-.coin.c5{ top:40%; right:4%; width:46px; height:46px; font-size:18px; animation-delay:-4s; }
+.coin.c1{ top:10%; left:5%; width:50px; height:50px; font-size:20px; animation-delay:-0.5s; }
+.coin.c2{ top:64%; left:4%; width:36px; height:36px; font-size:14px; animation-delay:-1.6s; }
+.coin.c3{ top:10%; right:15%; width:38px; height:38px; font-size:15px; animation-delay:-2.4s; }
+.coin.c4{ top:76%; right:9%; width:34px; height:34px; font-size:14px; animation-delay:-3.1s; }
+.coin.c5{ top:44%; right:3%; width:44px; height:44px; font-size:17px; animation-delay:-4s; }
 @keyframes coinFloat{ 0%,100%{ transform:translateY(0) rotate(-6deg); } 50%{ transform:translateY(-14px) rotate(6deg); } }
-@media (max-width:760px){ .coin.c2, .coin.c4{ display:none; } .coin{ width:34px; height:34px; font-size:14px; } }
+/* モバイル：文字に被らないよう右端／上部の安全地帯へ */
+@media (max-width:760px){
+  .coin{ width:34px; height:34px; font-size:14px; }
+  .coin.c2, .coin.c3, .coin.c4{ display:none; }
+  .coin.c1{ top:2%; left:auto; right:6%; width:40px; height:40px; font-size:16px; }
+  .coin.c5{ top:auto; bottom:9%; right:6%; }
+}
 
 @media (prefers-reduced-motion: reduce){ .coin, .fv-orb{ animation:none; } }
 
@@ -414,14 +415,19 @@ strong{ color:var(--blue-deep); font-weight:700; }
 .ad-results li.warn{ border-color:rgba(232,131,58,.45); background:#FFF9F3; }
 .ad-results li.warn .r-sim{ color:var(--warn); }
 
-.fv-scrollcue{
-  position:absolute; left:50%; transform:translateX(-50%); bottom:78px; z-index:3;
-  display:flex; align-items:center; gap:10px;
-  font-size:11px; font-weight:700; letter-spacing:.14em; color:var(--ink-faint);
+/* キャラクター＋注意書きの地面ゾーン */
+.fv-foot{
+  display:grid; grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:flex-end; gap:20px;
+  position:relative; z-index:2;
+  margin-top:30px;
 }
-.cue-arrow{ animation:cueBob 1.6s ease-in-out infinite; }
-@keyframes cueBob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(4px); } }
-@media (max-width:900px){ .fv-scrollcue{ display:none; } }
+.fv-foot .fv-disclaimer{ text-align:center; padding-bottom:24px; }
+@media (max-width:760px){
+  .fv-foot{ grid-template-columns:1fr; margin-top:14px; }
+  .fv-foot .fv-char{ display:none; }
+  .fv-foot .fv-disclaimer{ text-align:left; padding-bottom:0; }
+}
 
 .fv-wave{ position:absolute; left:0; right:0; bottom:-1px; line-height:0; z-index:1; }
 .fv-wave svg{ width:100%; height:60px; }
