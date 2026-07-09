@@ -93,6 +93,103 @@
     svg.appendChild(p);
   });
 
+  /* ---------- ヒーロー：アプリデモ（曲線ロックオン＋結果） ---------- */
+  const heroChart = document.getElementById("hero-chart");
+  if (heroChart) {
+    const ctx = heroChart.getContext("2d");
+    const simEl = document.getElementById("hero-sim");
+    let w = 0, h = 0;
+    const base = growthCurve(42, 60, 0.05);
+    const match = base.map((v, i) => {
+      const r = mulberry32(i * 13 + 5)();
+      return Math.max(0.05, Math.min(0.98, v + (r - 0.5) * 0.06));
+    });
+
+    const resize = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      w = heroChart.clientWidth; h = heroChart.clientHeight;
+      heroChart.width = w * dpr; heroChart.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const CYCLE = 5200;
+    const stroke = (pts, prog, color, width, glow, fill) => {
+      const n = Math.max(2, Math.floor(pts.length * prog));
+      if (fill) {
+        ctx.beginPath();
+        for (let i = 0; i < n; i++) {
+          const x = (i / (pts.length - 1)) * w;
+          const y = 16 + (1 - pts[i]) * (h - 32);
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        const xEnd = ((n - 1) / (pts.length - 1)) * w;
+        ctx.lineTo(xEnd, h); ctx.lineTo(0, h); ctx.closePath();
+        const g = ctx.createLinearGradient(0, 0, 0, h);
+        g.addColorStop(0, fill); g.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = g; ctx.fill();
+      }
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = (i / (pts.length - 1)) * w;
+        const y = 16 + (1 - pts[i]) * (h - 32);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = color; ctx.lineWidth = width;
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+      ctx.shadowColor = glow || "transparent"; ctx.shadowBlur = glow ? 10 : 0;
+      ctx.stroke(); ctx.shadowBlur = 0;
+    };
+
+    const frame = (t) => {
+      const p = (t % CYCLE) / CYCLE;
+      ctx.clearRect(0, 0, w, h);
+      stroke(base, Math.min(1, p / 0.4), "rgba(200,154,43,.9)", 2, "rgba(200,154,43,.35)", "rgba(229,185,78,.16)");
+      if (p > 0.45) {
+        const mp = Math.min(1, (p - 0.45) / 0.35);
+        stroke(match, mp, "rgba(23,168,123,.95)", 2, "rgba(23,168,123,.4)");
+        const idx = Math.max(1, Math.floor(match.length * mp) - 1);
+        const x = (idx / (match.length - 1)) * w;
+        const y = 16 + (1 - match[idx]) * (h - 32);
+        ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fillStyle = "#17A87B"; ctx.fill();
+        ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI * 2); ctx.strokeStyle = "rgba(23,168,123,.5)"; ctx.lineWidth = 1.5; ctx.stroke();
+        if (simEl) simEl.textContent = (mp * 97.4).toFixed(1);
+      } else if (simEl) { simEl.textContent = "0.0"; }
+      requestAnimationFrame(frame);
+    };
+
+    if (reduceMotion) {
+      stroke(base, 1, "rgba(200,154,43,.9)", 2, null, "rgba(229,185,78,.16)");
+      stroke(match, 1, "rgba(23,168,123,.95)", 2, null);
+      if (simEl) simEl.textContent = "97.4";
+    } else {
+      requestAnimationFrame(frame);
+    }
+
+    // 類似率順の結果リスト（イメージ）
+    const resWrap = document.getElementById("hero-results");
+    if (resWrap) {
+      const rows = [
+        { rank: "No.01", sim: "96.4", warn: false, seed: 3 },
+        { rank: "No.02", sim: "94.1", warn: false, seed: 9 },
+        { rank: "No.03", sim: "91.7", warn: true, seed: 15 },
+        { rank: "No.04", sim: "89.2", warn: false, seed: 21 },
+      ];
+      rows.forEach((r, i) => {
+        const pts = growthCurve(r.seed * 31 + 7, 20, 0.045);
+        const li = document.createElement("li");
+        if (r.warn) li.classList.add("warn");
+        li.innerHTML =
+          `<span class="r-rank">${r.rank}</span>` +
+          `<svg class="r-spark" viewBox="0 0 80 16"><path d="${pathFrom(pts, 80, 16)}" fill="none" stroke="${r.warn ? "#E8833A" : "#4FA3E8"}" stroke-width="1.4"/></svg>` +
+          `<span class="r-sim">${r.warn ? "⚠ " : ""}類似 ${r.sim}%</span>`;
+        resWrap.appendChild(li);
+        setTimeout(() => li.classList.add("show"), reduceMotion ? 0 : 600 + i * 180);
+      });
+    }
+  }
+
   /* ---------- S3：30銘柄グリッド（イメージ表示） ---------- */
   const grid = document.getElementById("result-grid");
   if (grid) {

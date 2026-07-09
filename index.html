@@ -38,16 +38,12 @@
 <!-- S1 / ファーストビュー                                  -->
 <!-- =================================================== -->
 <section class="fv" id="fv">
-  <div class="fv-deco deco-l" aria-hidden="true">
-    <figure class="ph" data-src="deco-coins-left.webp" data-size="600×600（透過）" style="aspect-ratio:1/1"></figure>
-  </div>
-  <div class="fv-deco deco-r" aria-hidden="true">
-    <figure class="ph" data-src="deco-coins-right.webp" data-size="600×600（透過）" style="aspect-ratio:1/1"></figure>
-  </div>
+  <div class="fv-orb orb-1" aria-hidden="true"></div>
+  <div class="fv-orb orb-2" aria-hidden="true"></div>
 
   <div class="container fv-grid">
     <div class="fv-copy">
-      <p class="fv-ribbon reveal"><span class="ribbon-star">✦</span>暗号資産市場のデータ分析を可視化するアプリ</p>
+      <p class="fv-ribbon reveal"><span class="ribbon-star">✦</span>暗号資産の分析アプリ<span class="ribbon-div">|</span><b>Crypto&nbsp;Nova</b></p>
 
       <h1 class="fv-title reveal d1">
         相場を、<br>
@@ -55,32 +51,46 @@
         ようになる。
       </h1>
 
-      <div class="fv-app reveal d2">
-        <span class="fv-app-name">Crypto Nova</span>
-        <span class="fv-app-kana">クリプト・ノヴァ</span>
-      </div>
-
-      <p class="fv-lead reveal d3">
-        毎日あふれる情報を、ひとつの画面に整理する。<br>
-        「何を見ればいいか」から、「自分はどう判断するか」へ。
+      <p class="fv-explain reveal d2">
+        ビットコインなどの<strong>成長曲線をAIが学習</strong>。<br class="pc">
+        数百万のアルトコインから、似た曲線を描く銘柄を
+        <strong class="hl">類似率が高い順に30銘柄</strong>、自動で表示します。
       </p>
 
-      <div class="fv-cta-row reveal d4">
-        <a class="btn-primary" href="#mechanism">
-          アプリの詳細を見る
-          <span class="btn-arrow" aria-hidden="true">↓</span>
-        </a>
-      </div>
+      <ul class="fv-feats reveal d3">
+        <li><i></i>数百万 → <b>30銘柄</b>に絞り込み</li>
+        <li><i></i>類似率で<b>順位づけ</b></li>
+        <li><i></i>注意銘柄に<b>警告マーク</b></li>
+      </ul>
 
-      <div class="fv-disclaimer reveal d5">
+      <div class="fv-disclaimer reveal d4">
         <p>※本アプリは市場データの分析・情報提供を行うものであり、利益を保証するものではありません。</p>
         <p>※暗号資産の取引には価格変動等のリスクがあります。</p>
       </div>
     </div>
 
     <div class="fv-visual reveal d2">
-      <figure class="ph" data-src="hero-main.webp" data-size="1600×1200" data-alt="Crypto Novaのアプリ画面（PC・スマートフォン）" style="aspect-ratio:4/3"></figure>
+      <div class="app-demo">
+        <div class="app-demo-bar">
+          <span class="ad-dot"></span><span class="ad-dot"></span><span class="ad-dot"></span>
+          <span class="ad-name">Crypto Nova</span>
+        </div>
+        <div class="app-demo-screen">
+          <p class="ad-cap">ビットコインの成長曲線に<b>似た銘柄</b>を探す</p>
+          <div class="ad-chart">
+            <canvas id="hero-chart"></canvas>
+            <span class="ad-sim">類似率&nbsp;<b id="hero-sim">0.0</b>%</span>
+          </div>
+          <div class="ad-next" aria-hidden="true"><span class="ad-next-pulse"></span>NEXT&nbsp;BTC</div>
+          <p class="ad-reslabel">似た曲線の銘柄（類似率順）</p>
+          <ul class="ad-results" id="hero-results" aria-hidden="true"></ul>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="fv-scrollcue reveal d4" aria-hidden="true">
+    スクロールして詳しく<span class="cue-arrow">↓</span>
   </div>
 
   <div class="fv-wave" aria-hidden="true">
