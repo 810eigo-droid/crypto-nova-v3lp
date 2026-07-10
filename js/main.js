@@ -190,40 +190,64 @@
     }
   }
 
-  /* ---------- S3：30銘柄グリッド（イメージ表示） ---------- */
+  /* ---------- S3：30銘柄の結果パネル（イメージ表示） ---------- */
+  const top3Wrap = document.getElementById("result-top3");
   const grid = document.getElementById("result-grid");
-  if (grid) {
+  if (top3Wrap && grid) {
     const rnd = mulberry32(20260709);
-    const cells = [];
+    const warnedIdx = [2, 9, 17, 25]; // 警告マークのサンプル位置（No.03含む）
+    const items = [];
     let sim = 97.8;
-
     for (let i = 0; i < 30; i++) {
       sim -= rnd() * 1.6 + 0.15;
-      const warned = [4, 11, 19, 26].includes(i); // 警告マークのサンプル位置
-      const cell = document.createElement("div");
-      cell.className = `result-cell${warned ? " warned" : ""}`;
-
-      const pts = growthCurve(i * 31 + 7, 22, 0.045);
-      cell.innerHTML =
-        `<div class="cell-rank"><span>No.${String(i + 1).padStart(2, "0")}</span>` +
-        (warned ? `<span class="cell-warn">⚠</span>` : "") +
-        `</div>` +
-        `<svg viewBox="0 0 64 20"><path d="${pathFrom(pts, 64, 20)}" fill="none" stroke="${warned ? "#E8833A" : "#4FA3E8"}" stroke-width="1.2" opacity=".9"/></svg>` +
-        `<div class="cell-sim">類似 ${sim.toFixed(1)}%</div>`;
-      grid.appendChild(cell);
-      cells.push(cell);
+      items.push({ sim: sim.toFixed(1), warn: warnedIdx.includes(i) });
     }
 
-    // グリッドが見えたら順番にポップ
+    const cells = [];
+
+    // 上位3銘柄：大きなカード（類似率バー付き）
+    items.slice(0, 3).forEach((it, i) => {
+      const pts = growthCurve(i * 31 + 7, 26, 0.05);
+      const el = document.createElement("div");
+      el.className = `t3-card${it.warn ? " warned" : ""}`;
+      el.innerHTML =
+        `<div class="t3-head"><span class="t3-rank">No.0${i + 1}</span>` +
+        (it.warn ? `<span class="t3-warn">⚠<em> 注意</em></span>` : "") +
+        `</div>` +
+        `<svg viewBox="0 0 120 34"><path d="${pathFrom(pts, 120, 34)}" fill="none" stroke="${it.warn ? "#F0A05C" : "#6FB9F0"}" stroke-width="1.6" stroke-linecap="round"/></svg>` +
+        `<div class="t3-sim"><span>類似率</span><b>${it.sim}%</b></div>` +
+        `<div class="t3-bar"><i style="--w:${it.sim}%"></i></div>`;
+      top3Wrap.appendChild(el);
+      cells.push(el);
+    });
+
+    // No.04〜30：コンパクトセル
+    items.slice(3).forEach((it, idx) => {
+      const i = idx + 3;
+      const pts = growthCurve(i * 31 + 7, 22, 0.045);
+      const el = document.createElement("div");
+      el.className = `result-cell${it.warn ? " warned" : ""}`;
+      el.innerHTML =
+        `<div class="cell-rank"><span>No.${String(i + 1).padStart(2, "0")}</span>` +
+        (it.warn ? `<span class="cell-warn">⚠</span>` : "") +
+        `</div>` +
+        `<svg viewBox="0 0 64 20"><path d="${pathFrom(pts, 64, 20)}" fill="none" stroke="${it.warn ? "#F0A05C" : "#6FB9F0"}" stroke-width="1.2" opacity=".85"/></svg>` +
+        `<div class="cell-sim">類似 ${it.sim}%</div>`;
+      grid.appendChild(el);
+      cells.push(el);
+    });
+
+    // パネルが見えたら順番にポップ
+    const panel = document.querySelector(".mech-result");
     const gio = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         cells.forEach((c, i) => {
-          setTimeout(() => c.classList.add("pop"), reduceMotion ? 0 : i * 45);
+          setTimeout(() => c.classList.add("pop"), reduceMotion ? 0 : i * 40);
         });
         gio.disconnect();
       }
-    }, { threshold: 0.2 });
-    gio.observe(grid);
+    }, { threshold: 0.12 });
+    gio.observe(panel);
   }
 
   /* ---------- FAQ：開いたら他を閉じる ---------- */

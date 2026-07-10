@@ -163,21 +163,28 @@
     </header>
 
     <div class="mech-flow">
-      <!-- 学習ソース -->
+      <!-- STEP01 学習ソース -->
       <div class="mech-source card reveal">
+        <div class="stage-tag"><span>STEP</span><b>01</b><em>学習</em></div>
         <p class="mech-caption">AIが学習した成長曲線（時系列のチャートデータ）</p>
         <ul class="coin-chips">
-          <li><svg class="spark" data-seed="1" viewBox="0 0 64 24"></svg><b>BTC</b><span>ビットコイン</span></li>
-          <li><svg class="spark" data-seed="2" viewBox="0 0 64 24"></svg><b>ETH</b><span>イーサリアム</span></li>
-          <li><svg class="spark" data-seed="3" viewBox="0 0 64 24"></svg><b>BNB</b><span>バイナンスコイン</span></li>
-          <li><svg class="spark" data-seed="4" viewBox="0 0 64 24"></svg><b>XRP</b><span>リップル</span></li>
-          <li><svg class="spark" data-seed="5" viewBox="0 0 64 24"></svg><b>SHIB</b><span>柴犬コイン</span></li>
-          <li><svg class="spark" data-seed="6" viewBox="0 0 64 24"></svg><b>DOGE</b><span>ドージコイン</span></li>
+          <li><span class="coin-ic">₿</span><svg class="spark" data-seed="1" viewBox="0 0 64 24"></svg><b>BTC</b><span>ビットコイン</span></li>
+          <li><span class="coin-ic">Ξ</span><svg class="spark" data-seed="2" viewBox="0 0 64 24"></svg><b>ETH</b><span>イーサリアム</span></li>
+          <li><span class="coin-ic">B</span><svg class="spark" data-seed="3" viewBox="0 0 64 24"></svg><b>BNB</b><span>バイナンスコイン</span></li>
+          <li><span class="coin-ic">X</span><svg class="spark" data-seed="4" viewBox="0 0 64 24"></svg><b>XRP</b><span>リップル</span></li>
+          <li><span class="coin-ic">S</span><svg class="spark" data-seed="5" viewBox="0 0 64 24"></svg><b>SHIB</b><span>柴犬コイン</span></li>
+          <li><span class="coin-ic">D</span><svg class="spark" data-seed="6" viewBox="0 0 64 24"></svg><b>DOGE</b><span>ドージコイン</span></li>
         </ul>
       </div>
 
-      <!-- ボタン -->
+      <!-- STEP02 AIコア → ボタン -->
       <div class="mech-button reveal">
+        <div class="stage-tag mid"><span>STEP</span><b>02</b><em>照合</em></div>
+        <div class="ai-core" aria-hidden="true">
+          <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+          <span class="ai-face">AI</span>
+        </div>
+        <p class="ai-note">曲線の「かたち」を照合</p>
         <div class="nextbtc-btn" role="img" aria-label="NEXT BTCボタンのイメージ">
           <span class="nextbtc-pulse"></span>
           <span class="nextbtc-face">NEXT&nbsp;BTC</span>
@@ -185,11 +192,24 @@
         <p class="mech-tap">ボタンをタップすると——</p>
       </div>
 
-      <!-- 結果 -->
-      <div class="mech-result card reveal">
-        <p class="mech-caption">似た成長曲線を描いているアルトコインを、類似率が高い順に<b class="num">30</b>個表示</p>
-        <div class="result-grid" id="result-grid" aria-hidden="true"></div>
-        <p class="img-note">※画面はイメージです。実際の表示・数値・銘柄とは異なります。</p>
+      <!-- STEP03 結果（アプリ風ダークパネル） -->
+      <div class="mech-result reveal">
+        <div class="rp-bar">
+          <span class="rp-dot"></span><span class="rp-dot"></span><span class="rp-dot"></span>
+          <span class="rp-title">Crypto Nova — 分析結果</span>
+          <span class="stage-tag dark"><span>STEP</span><b>03</b><em>抽出</em></span>
+        </div>
+        <div class="rp-body">
+          <div class="rp-stat" aria-hidden="true">
+            <span class="rp-from">数百万銘柄</span>
+            <span class="rp-arrow">→</span>
+            <span class="rp-to"><b>30</b><small>銘柄</small></span>
+          </div>
+          <p class="rp-caption">似た成長曲線を描いているアルトコインを、類似率が高い順に<b>30</b>個表示</p>
+          <div class="rp-top3" id="result-top3" aria-hidden="true"></div>
+          <div class="rp-grid" id="result-grid" aria-hidden="true"></div>
+          <p class="img-note dark">※画面はイメージです。実際の表示・数値・銘柄とは異なります。</p>
+        </div>
       </div>
     </div>
 
