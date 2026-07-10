@@ -254,7 +254,7 @@ strong{ color:var(--blue-deep); font-weight:700; }
   margin-bottom:-12px; /* 足元を波に少し重ねて「立たせる」 */
 }
 .fv-char{
-  width:clamp(150px, 16vw, 240px);
+  width:clamp(170px, 19vw, 295px);
   border:0; background:none; border-radius:0;
 }
 .fv-char::before, .fv-char::after{ opacity:.5; }
@@ -277,6 +277,9 @@ strong{ color:var(--blue-deep); font-weight:700; }
   content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%);
   border:7px solid transparent; border-top-color:var(--gold);
 }
+/* 右キャラの吹き出しは左に寄せる（画面端から離す） */
+.fv-char-wrap:last-child .char-bubble{ left:26%; }
+.fv-char-wrap:last-child .char-bubble::after{ left:70%; }
 
 /* 浮遊コイン（CSS） */
 .fv-coins{ position:absolute; inset:0; z-index:1; pointer-events:none; }
