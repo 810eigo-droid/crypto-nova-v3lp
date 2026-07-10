@@ -50,9 +50,10 @@
     <span class="coin c5">₿</span>
   </div>
 
-  <!-- スマホ専用フルFV画像（PCでは非表示） -->
+  <!-- スマホ専用フルFV画像（PCでは非表示／読込失敗時は枠ごと非表示） -->
   <figure class="fv-sp">
     <img src="images/fv-sp.webp" width="887" height="1774"
+      onerror="this.closest('.fv-sp').style.display='none'"
       alt="Crypto Nova｜相場を、自分の目で読めるようになる。ビットコインなどの成長曲線をAIが学習し、数百万のアルトコインから似た曲線の銘柄を類似率が高い順に30銘柄、自動で表示します。">
   </figure>
 

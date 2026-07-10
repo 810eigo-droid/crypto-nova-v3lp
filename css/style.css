@@ -224,7 +224,7 @@ strong{ color:var(--blue-deep); font-weight:700; }
    =================================================== */
 .fv{
   position:relative;
-  padding:128px 0 24px;
+  padding:128px 0 0;
   background:
     radial-gradient(55% 45% at 82% 8%, rgba(255,243,214,.85), transparent 60%),
     radial-gradient(48% 40% at 8% 78%, rgba(200,228,250,.85), transparent 62%),
@@ -250,9 +250,11 @@ strong{ color:var(--blue-deep); font-weight:700; }
 
 /* フッターのキャラクター（透過画像をimagesに入れると表示） */
 .fv-char{
-  width:clamp(120px, 14vw, 200px);
+  width:clamp(150px, 16vw, 240px);
   align-self:flex-end;
   border:0; background:none; border-radius:0;
+  position:relative; z-index:3;
+  margin-bottom:-12px; /* 足元を波に少し重ねて「立たせる」 */
 }
 .fv-char::before, .fv-char::after{ opacity:.5; }
 .fv-char.loaded img{ object-fit:contain; object-position:bottom; }
@@ -420,13 +422,13 @@ strong{ color:var(--blue-deep); font-weight:700; }
   display:grid; grid-template-columns:auto minmax(0,1fr) auto;
   align-items:flex-end; gap:20px;
   position:relative; z-index:2;
-  margin-top:30px;
+  margin-top:6px;
 }
-.fv-foot .fv-disclaimer{ text-align:center; padding-bottom:24px; }
+.fv-foot .fv-disclaimer{ text-align:center; padding-bottom:52px; }
 @media (max-width:760px){
-  .fv-foot{ grid-template-columns:1fr; margin-top:14px; }
+  .fv-foot{ grid-template-columns:1fr; margin-top:0; }
   .fv-foot .fv-char{ display:none; }
-  .fv-foot .fv-disclaimer{ text-align:left; padding-bottom:0; }
+  .fv-foot .fv-disclaimer{ text-align:center; padding:8px 14px 34px; }
 }
 
 .fv-wave{ position:absolute; left:0; right:0; bottom:-1px; line-height:0; z-index:1; }
@@ -434,12 +436,13 @@ strong{ color:var(--blue-deep); font-weight:700; }
 
 /* スマホ表示：組み込みFVを隠し、フルFV画像に切り替え（記述位置は後方＝優先） */
 @media (max-width:760px){
-  .fv{ padding:62px 0 18px; background:#EAF4FC; }
+  .fv{ padding:62px 0 0; background:#EAF4FC; }
   .fv .fv-grid, .fv-coins, .fv-orb{ display:none; }
   .fv-sp{ display:block; }
   .fv-sp img{ width:100%; max-width:500px; height:auto; margin:0 auto; display:block; }
-  .fv .fv-foot{ margin-top:8px; }
-  .fv .fv-foot .fv-disclaimer{ text-align:center; padding:14px 14px 0; }
+  .fv .fv-foot{ margin-top:0; }
+  .fv .fv-foot .fv-disclaimer{ text-align:center; padding:6px 14px 26px; }
+  .fv-wave svg{ height:30px; }
 }
 
 /* ===================================================
