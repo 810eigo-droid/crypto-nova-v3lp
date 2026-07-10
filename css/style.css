@@ -231,7 +231,7 @@ strong{ color:var(--blue-deep); font-weight:700; }
     linear-gradient(165deg, #F4FAFF 0%, var(--bg-blue) 55%, var(--bg-blue-2) 100%);
   overflow:hidden;
 }
-@media (max-width:760px){ .fv{ padding:74px 0 20px; } }
+.fv-sp{ display:none; }
 .fv-orb{
   position:absolute; border-radius:50%; z-index:0; pointer-events:none;
   filter:blur(8px); opacity:.55;
@@ -431,6 +431,16 @@ strong{ color:var(--blue-deep); font-weight:700; }
 
 .fv-wave{ position:absolute; left:0; right:0; bottom:-1px; line-height:0; z-index:1; }
 .fv-wave svg{ width:100%; height:60px; }
+
+/* スマホ表示：組み込みFVを隠し、フルFV画像に切り替え（記述位置は後方＝優先） */
+@media (max-width:760px){
+  .fv{ padding:62px 0 18px; background:#EAF4FC; }
+  .fv .fv-grid, .fv-coins, .fv-orb{ display:none; }
+  .fv-sp{ display:block; }
+  .fv-sp img{ width:100%; max-width:500px; height:auto; margin:0 auto; display:block; }
+  .fv .fv-foot{ margin-top:8px; }
+  .fv .fv-foot .fv-disclaimer{ text-align:center; padding:14px 14px 0; }
+}
 
 /* ===================================================
    S2 / 問題定義
