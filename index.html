@@ -29,7 +29,7 @@
     <a href="#howto">使い方</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a class="nav-cta" href="#final-cta">詳細を見る</a>
+  <a class="nav-cta" href="#final-cta">資料DLはこちら</a>
 </nav>
 
 <main id="top">
@@ -41,13 +41,7 @@
   <div class="fv-orb orb-1" aria-hidden="true"></div>
   <div class="fv-orb orb-2" aria-hidden="true"></div>
 
-  <!-- 背景キャラクター（透過画像をimagesに入れると表示） -->
-  <div class="fv-characters" aria-hidden="true">
-    <figure class="ph fv-char char-l" data-src="char-left.webp" data-size="520×760・透過" style="aspect-ratio:52/76"></figure>
-    <figure class="ph fv-char char-r" data-src="char-right.webp" data-size="520×760・透過" style="aspect-ratio:52/76"></figure>
-  </div>
-
-  <!-- 浮遊コイン（CSS描画・画像不要） -->
+  <!-- 浮遊コイン（CSS描画・画像不要／PCのみ表示） -->
   <div class="fv-coins" aria-hidden="true">
     <span class="coin c1">₿</span>
     <span class="coin c2">Ξ</span>
@@ -55,6 +49,13 @@
     <span class="coin c4">¥</span>
     <span class="coin c5">₿</span>
   </div>
+
+  <!-- スマホ専用フルFV画像（PCでは非表示／読込失敗時は枠ごと非表示） -->
+  <figure class="fv-sp">
+    <img src="images/fv-sp.webp" width="887" height="1774"
+      onerror="this.closest('.fv-sp').style.display='none'"
+      alt="Crypto Nova｜相場を、自分の目で読めるようになる。ビットコインなどの成長曲線をAIが学習し、数百万のアルトコインから似た曲線の銘柄を類似率が高い順に30銘柄、自動で表示します。">
+  </figure>
 
   <div class="container fv-grid">
     <div class="fv-copy">
@@ -77,11 +78,6 @@
         <li><i></i>類似率で<b>順位づけ</b></li>
         <li><i></i>注意銘柄に<b>警告マーク</b></li>
       </ul>
-
-      <div class="fv-disclaimer reveal d4">
-        <p>※本アプリは市場データの分析・情報提供を行うものであり、利益を保証するものではありません。</p>
-        <p>※暗号資産の取引には価格変動等のリスクがあります。</p>
-      </div>
     </div>
 
     <div class="fv-visual reveal d2">
@@ -104,8 +100,41 @@
     </div>
   </div>
 
-  <div class="fv-scrollcue reveal d4" aria-hidden="true">
-    スクロールして詳しく<span class="cue-arrow">↓</span>
+  <!-- キャラクター＋信頼バッジ＋注意書きの地面ゾーン -->
+  <div class="container fv-foot reveal d4">
+    <div class="fv-char-wrap">
+      <span class="char-bubble">そもそも、<br>どれを調べればいい？</span>
+      <figure class="ph fv-char char-l" data-src="char-left.webp" data-size="520×760・透過" style="aspect-ratio:52/76"></figure>
+    </div>
+
+    <div class="fv-trust">
+      <ul class="trust-list">
+        <li>
+          <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M6 18h6M9 14v4"/><rect x="17" y="8" width="5" height="10" rx="1.2"/></svg></i>
+          <b>3つの端末に対応</b>
+          <span>Windows / iPhone / Android</span>
+        </li>
+        <li>
+          <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3v4h-4"/></svg></i>
+          <b>分析データの随時更新</b>
+          <span>市場データの分析・情報提供</span>
+        </li>
+        <li>
+          <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 10-4-1.6-7-5.6-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></i>
+          <b>売買機能なし</b>
+          <span>資産をお預かりすることもありません</span>
+        </li>
+      </ul>
+      <div class="fv-disclaimer">
+        <p>※本アプリは市場データの分析・情報提供を行うものであり、利益を保証するものではありません。</p>
+        <p>※暗号資産の取引には価格変動等のリスクがあります。</p>
+      </div>
+    </div>
+
+    <div class="fv-char-wrap">
+      <span class="char-bubble">絞り込みはAIに任せて、<br>決めるのは自分。</span>
+      <figure class="ph fv-char char-r" data-src="char-right.webp" data-size="520×760・透過" style="aspect-ratio:52/76"></figure>
+    </div>
   </div>
 
   <div class="fv-wave" aria-hidden="true">
@@ -119,7 +148,7 @@
 <section class="problem section bg-white" id="problem">
   <div class="container">
     <header class="sec-head reveal">
-      <p class="sec-badge">問題定義</p>
+      <p class="sec-badge">Definition</p>
       <h2 class="sec-title">「調べる」と「決める」のあいだには、<br class="pc"><span class="mk">壁</span>があります。</h2>
     </header>
 
@@ -162,21 +191,28 @@
     </header>
 
     <div class="mech-flow">
-      <!-- 学習ソース -->
+      <!-- STEP01 学習ソース -->
       <div class="mech-source card reveal">
+        <div class="stage-tag"><span>STEP</span><b>01</b><em>学習</em></div>
         <p class="mech-caption">AIが学習した成長曲線（時系列のチャートデータ）</p>
         <ul class="coin-chips">
-          <li><svg class="spark" data-seed="1" viewBox="0 0 64 24"></svg><b>BTC</b><span>ビットコイン</span></li>
-          <li><svg class="spark" data-seed="2" viewBox="0 0 64 24"></svg><b>ETH</b><span>イーサリアム</span></li>
-          <li><svg class="spark" data-seed="3" viewBox="0 0 64 24"></svg><b>BNB</b><span>バイナンスコイン</span></li>
-          <li><svg class="spark" data-seed="4" viewBox="0 0 64 24"></svg><b>XRP</b><span>リップル</span></li>
-          <li><svg class="spark" data-seed="5" viewBox="0 0 64 24"></svg><b>SHIB</b><span>柴犬コイン</span></li>
-          <li><svg class="spark" data-seed="6" viewBox="0 0 64 24"></svg><b>DOGE</b><span>ドージコイン</span></li>
+          <li><span class="coin-ic">₿</span><svg class="spark" data-seed="1" viewBox="0 0 64 24"></svg><b>BTC</b><span>ビットコイン</span></li>
+          <li><span class="coin-ic">Ξ</span><svg class="spark" data-seed="2" viewBox="0 0 64 24"></svg><b>ETH</b><span>イーサリアム</span></li>
+          <li><span class="coin-ic">B</span><svg class="spark" data-seed="3" viewBox="0 0 64 24"></svg><b>BNB</b><span>バイナンスコイン</span></li>
+          <li><span class="coin-ic">X</span><svg class="spark" data-seed="4" viewBox="0 0 64 24"></svg><b>XRP</b><span>リップル</span></li>
+          <li><span class="coin-ic">S</span><svg class="spark" data-seed="5" viewBox="0 0 64 24"></svg><b>SHIB</b><span>柴犬コイン</span></li>
+          <li><span class="coin-ic">D</span><svg class="spark" data-seed="6" viewBox="0 0 64 24"></svg><b>DOGE</b><span>ドージコイン</span></li>
         </ul>
       </div>
 
-      <!-- ボタン -->
+      <!-- STEP02 AIコア → ボタン -->
       <div class="mech-button reveal">
+        <div class="stage-tag mid"><span>STEP</span><b>02</b><em>照合</em></div>
+        <div class="ai-core" aria-hidden="true">
+          <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+          <span class="ai-face">AI</span>
+        </div>
+        <p class="ai-note">曲線の「かたち」を照合</p>
         <div class="nextbtc-btn" role="img" aria-label="NEXT BTCボタンのイメージ">
           <span class="nextbtc-pulse"></span>
           <span class="nextbtc-face">NEXT&nbsp;BTC</span>
@@ -184,11 +220,24 @@
         <p class="mech-tap">ボタンをタップすると——</p>
       </div>
 
-      <!-- 結果 -->
-      <div class="mech-result card reveal">
-        <p class="mech-caption">似た成長曲線を描いているアルトコインを、類似率が高い順に<b class="num">30</b>個表示</p>
-        <div class="result-grid" id="result-grid" aria-hidden="true"></div>
-        <p class="img-note">※画面はイメージです。実際の表示・数値・銘柄とは異なります。</p>
+      <!-- STEP03 結果（アプリ風ダークパネル） -->
+      <div class="mech-result reveal">
+        <div class="rp-bar">
+          <span class="rp-dot"></span><span class="rp-dot"></span><span class="rp-dot"></span>
+          <span class="rp-title">Crypto Nova — 分析結果</span>
+          <span class="stage-tag dark"><span>STEP</span><b>03</b><em>抽出</em></span>
+        </div>
+        <div class="rp-body">
+          <div class="rp-stat" aria-hidden="true">
+            <span class="rp-from">数百万銘柄</span>
+            <span class="rp-arrow">→</span>
+            <span class="rp-to"><b>30</b><small>銘柄</small></span>
+          </div>
+          <p class="rp-caption">似た成長曲線を描いているアルトコインを、類似率が高い順に<b>30</b>個表示</p>
+          <div class="rp-top3" id="result-top3" aria-hidden="true"></div>
+          <div class="rp-grid" id="result-grid" aria-hidden="true"></div>
+          <p class="img-note dark">※画面はイメージです。実際の表示・数値・銘柄とは異なります。</p>
+        </div>
       </div>
     </div>
 
